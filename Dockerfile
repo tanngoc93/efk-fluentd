@@ -1,4 +1,6 @@
-FROM fluent/fluentd:v1.6-debian-1
+FROM fluent/fluentd
 USER root
-RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-document", "--version", "3.5.2"]
+# https://docs.fluentd.org/output/elasticsearch
+RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-rdoc", "--no-ri"]
 USER fluent
+ENTRYPOINT ["fluentd", "-c", "/fluentd/etc/fluent.conf"]
